@@ -34,18 +34,35 @@ def who_wins(user,computer):
 
 def new_game():
 
-    game_limit = 5
+    try_limit = 5
     wrong_input = True
 
-    while wrong_input and game_limit > 0:
+    while wrong_input and try_limit > 0:
         user_input = input('enter one of there three to make a move R S P: ')
         user_input = user_input.lower()
         wrong_input = is_wrong(user_input)
-        game_limit -= 1
+        try_limit -= 1
 
     computer_input = generate_turn()
     print('between', user_input, computer_input)
     print('wins:', who_wins(user_input, computer_input))
 
+def main():
+    game_limit = 6
+    play_again = True
+    try_limit = 10
 
-new_game()
+    while play_again and game_limit > 0 and try_limit > 0:
+        new_game()
+        game_limit -= 1
+        play = input('play again? (y/n):')
+        if play in 'yY':
+            continue
+        elif play in 'nN':
+            play_again = False
+        else:
+            print('enter valid input')
+            try_limit -= 1
+
+main()
+
