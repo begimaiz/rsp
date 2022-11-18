@@ -14,21 +14,20 @@ def is_wrong(letter):
     else:
         return True
 
-def who_wins(user,computer):
-    if user == computer:
-        return 'tie'
-    elif user == 'r' and computer == 's':
-        return user
-    elif user == 'r' and computer == 'p':
-        return computer
-    elif user == 'p' and computer == 'r':
-        return user
-    elif user == 'p' and computer == 's':
-        return computer
-    elif user == 's' and computer == 'p':
-        return user
-    elif user == 's' and computer == 'r':
-        return computer
+
+def who_wins(u, c):
+    if u == c:
+        return 'Tie'
+
+    elif (u == 'r' and c == 's') or\
+            (u == 's' and c == 'p') or \
+            (u == 'p' and c == 'r'):
+        return u
+
+    elif (u == 'r' and c == 'p') or \
+            (u == 'p' and c == 's') or \
+            (u == 's' and c == 'r'):
+        return c
 
 
 def interpreter(letter):
