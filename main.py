@@ -31,6 +31,16 @@ def who_wins(user,computer):
         return computer
 
 
+def interpreter(letter):
+    if letter == 'p':
+        return 'Paper'
+    elif letter == 'r':
+        return 'Rock'
+    elif letter == 's':
+        return 'Scissors'
+    else:
+        return 'Tie'
+
 
 def new_game():
 
@@ -44,8 +54,9 @@ def new_game():
         try_limit -= 1
 
     computer_input = generate_turn()
-    print('between', user_input, computer_input)
-    print('wins:', who_wins(user_input, computer_input))
+    print('Between', interpreter(user_input), interpreter(computer_input))
+    print('Wins:', interpreter(who_wins(user_input, computer_input)))
+
 
 def main():
     game_limit = 6
