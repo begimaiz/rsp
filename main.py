@@ -59,17 +59,21 @@ def new_game():
     print()
     time.sleep(2)
     print('Between:', interpreter(user_input), interpreter(computer_input))
-    print('Wins:', interpreter(who_wins(user_input, computer_input)))
-
+    winner = interpreter(who_wins(user_input, computer_input))
+    print('Wins:', winner)
+    return winner
 
 def main():
     game_limit = 6
     computer_wins = 0
     user_wins = 0
+    winner = ''
     play_again = True
     try_limit = 10
+
     while play_again and game_limit > 0 and try_limit > 0:
-        new_game()
+        winner = new_game()
+
         game_limit -= 1
         print()
         play = input('Play again? (y/n):')
