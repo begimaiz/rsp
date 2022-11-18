@@ -1,17 +1,8 @@
 import random
 
 def generate_turn():
-    letter = ''
-    random_number = random.randint(2)
-    if random_number == 0:
-        letter = 'r'
-    elif random_number == 1:
-        letter = 's'
-    elif random_number == 2:
-        letter = 'p'
-    else:
-        letter = 'n'
-    return letter
+    list_letter = ['r', 's', 'p']
+    return random.choice(list_letter)
 
 
 def is_wrong(letter):
@@ -22,6 +13,9 @@ def is_wrong(letter):
             return True
     else:
         return True
+
+def who_wins(user,computer):
+    pass
 
 def new_game():
 
@@ -34,4 +28,7 @@ def new_game():
         wrong_input = is_wrong(user_input)
         game_limit -= 1
 
-new_game()
+    computer_input = generate_turn()
+
+
+print(generate_turn())
