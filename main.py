@@ -1,4 +1,5 @@
 import random
+import time
 
 
 def generate_turn():
@@ -19,12 +20,10 @@ def is_wrong(letter):
 def who_wins(u, c):
     if u == c:
         return 'Tie'
-
     elif (u == 'r' and c == 's') or\
             (u == 's' and c == 'p') or \
             (u == 'p' and c == 'r'):
         return u
-
     elif (u == 'r' and c == 'p') or \
             (u == 'p' and c == 's') or \
             (u == 's' and c == 'r'):
@@ -43,36 +42,44 @@ def interpreter(letter):
 
 
 def new_game():
-
     try_limit = 5
     wrong_input = True
     user_input = ''
     while wrong_input and try_limit > 0:
-        user_input = input('enter one of there three to make a move R S P: ')
+        user_input = input('Enter one of these three to make a move (R/S/P): ')
+        print()
         user_input = user_input.lower()
         wrong_input = is_wrong(user_input)
         try_limit -= 1
-
     computer_input = generate_turn()
+    time.sleep(1)
+    print('Computer entered the following:', computer_input)
+    print()
+    print('Calculating...')
+    print()
+    time.sleep(2)
     print('Between:', interpreter(user_input), interpreter(computer_input))
     print('Wins:', interpreter(who_wins(user_input, computer_input)))
 
 
 def main():
     game_limit = 6
+    computer_wins = 0
+    user_wins = 0
     play_again = True
     try_limit = 10
-
     while play_again and game_limit > 0 and try_limit > 0:
         new_game()
         game_limit -= 1
+        print()
         play = input('Play again? (y/n):')
+        print()
         if play in 'yY' or play == '':
             continue
         elif play in 'nN':
             play_again = False
         else:
-            print('enter valid input')
+            print('Enter valid input!')
             try_limit -= 1
 
 
