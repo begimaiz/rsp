@@ -15,7 +15,22 @@ def is_wrong(letter):
         return True
 
 def who_wins(user,computer):
-    pass
+    if user == computer:
+        return 'tie'
+    elif user == 'r' and computer == 's':
+        return user
+    elif user == 'r' and computer == 'p':
+        return computer
+    elif user == 'p' and computer == 'r':
+        return user
+    elif user == 'p' and computer == 's':
+        return computer
+    elif user == 's' and computer == 'p':
+        return user
+    elif user == 's' and computer == 'r':
+        return computer
+
+
 
 def new_game():
 
@@ -29,6 +44,8 @@ def new_game():
         game_limit -= 1
 
     computer_input = generate_turn()
+    print('between', user_input, computer_input)
+    print('wins:', who_wins(user_input, computer_input))
 
 
-print(generate_turn())
+new_game()
