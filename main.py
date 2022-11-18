@@ -1,5 +1,6 @@
 import random
 
+
 def generate_turn():
     list_letter = ['r', 's', 'p']
     return random.choice(list_letter)
@@ -45,7 +46,7 @@ def new_game():
 
     try_limit = 5
     wrong_input = True
-
+    user_input = ''
     while wrong_input and try_limit > 0:
         user_input = input('enter one of there three to make a move R S P: ')
         user_input = user_input.lower()
@@ -53,7 +54,7 @@ def new_game():
         try_limit -= 1
 
     computer_input = generate_turn()
-    print('Between', interpreter(user_input), interpreter(computer_input))
+    print('Between:', interpreter(user_input), interpreter(computer_input))
     print('Wins:', interpreter(who_wins(user_input, computer_input)))
 
 
@@ -65,8 +66,8 @@ def main():
     while play_again and game_limit > 0 and try_limit > 0:
         new_game()
         game_limit -= 1
-        play = input('play again? (y/n):')
-        if play in 'yY':
+        play = input('Play again? (y/n):')
+        if play in 'yY' or play == '':
             continue
         elif play in 'nN':
             play_again = False
@@ -74,5 +75,5 @@ def main():
             print('enter valid input')
             try_limit -= 1
 
-main()
 
+main()
