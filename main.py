@@ -23,11 +23,11 @@ def who_wins(u, c):
     elif (u == 'r' and c == 's') or\
             (u == 's' and c == 'p') or \
             (u == 'p' and c == 'r'):
-        return u
+        return 'user'
     elif (u == 'r' and c == 'p') or \
             (u == 'p' and c == 's') or \
             (u == 's' and c == 'r'):
-        return c
+        return 'computer'
 
 
 def interpreter(letter):
@@ -42,42 +42,71 @@ def interpreter(letter):
 
 
 def new_game():
-    try_limit = 5
-    wrong_input = True
     user_input = ''
-    while wrong_input and try_limit > 0:
-        user_input = input('Enter one of these three to make a move (R/S/P): ')
-        print()
-        user_input = user_input.lower()
-        wrong_input = is_wrong(user_input)
-        try_limit -= 1
-    computer_input = generate_turn()
-    time.sleep(1)
-    print('Computer entered the following:', computer_input)
-    print()
-    print('Calculating...')
-    print()
-    time.sleep(2)
-    print('Between:', interpreter(user_input), interpreter(computer_input))
-    winner = interpreter(who_wins(user_input, computer_input))
-    print('Wins:', winner)
-    return winner
-
-def main():
-    game_limit = 6
     computer_wins = 0
     user_wins = 0
-    winner = ''
+
+    game_limit = 20
+    score = {'user': 0, 'computer': 0}
+
+    while game_limit > 0 and user_wins <= 2 and computer_wins <= 2:
+
+        try_limit = 5
+        wrong_input = True
+
+        while wrong_input and try_limit > 0:
+            user_input = input('Enter one of these three to make a move (R/S/P): ')
+            print()
+            user_input = user_input.lower()
+            wrong_input = is_wrong(user_input)
+            try_limit -= 1
+
+        computer_input = generate_turn()
+        time.sleep(1)
+        print('Computer entered the following:', computer_input)
+        print()
+        print('Calculating...')
+        print()
+        time.sleep(2)
+        print('Between:')
+        print('User:', interpreter(user_input))
+        print('Computer:', interpreter(computer_input))
+        winner = who_wins(user_input, computer_input)
+        print()
+        print('Wins:', winner)
+
+        game_limit += 1
+
+        if winner == 'user':
+            user_wins += 1
+            score['user'] += 1
+        elif winner == 'computer':
+            computer_wins += 1
+            score['computer'] += 1
+        else:
+            pass
+
+        print()
+        print(score)
+        print()
+
+
+def main():
+
+    session_limit = 20
     play_again = True
     try_limit = 10
 
-    while play_again and game_limit > 0 and try_limit > 0:
-        winner = new_game()
+    while play_again and session_limit > 0 and try_limit > 0:
 
-        game_limit -= 1
+        new_game()
+
+        session_limit -= 1
+
         print()
         play = input('Play again? (y/n):')
         print()
+
         if play in 'yY' or play == '':
             continue
         elif play in 'nN':
