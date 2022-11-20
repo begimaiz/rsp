@@ -12,8 +12,10 @@ def is_wrong(letter):
         if letter in 'rsp':
             return False
         else:
+            print('Enter valid input! only one of P R S allowed')
             return True
     else:
+        print('Enter valid input! only one character allowed')
         return True
 
 
@@ -42,24 +44,30 @@ def interpreter(letter):
 
 
 def new_game():
-    user_input = ''
+
     computer_wins = 0
     user_wins = 0
-
+    user_input = ''
     game_limit = 20
     score = {'user': 0, 'computer': 0}
 
     while game_limit > 0 and user_wins <= 2 and computer_wins <= 2:
 
-        try_limit = 5
         wrong_input = True
-
+        try_limit = 5
         while wrong_input and try_limit > 0:
-            user_input = input('Enter one of these three to make a move (R/S/P): ')
             print()
+            message = 'Enter R/S/P ('+str(try_limit)+'): '
+            user_input = input(message)
+
             user_input = user_input.lower()
             wrong_input = is_wrong(user_input)
+
             try_limit -= 1
+
+        if wrong_input:
+            game_limit = 0
+            continue
 
         computer_input = generate_turn()
         time.sleep(1)
@@ -92,25 +100,29 @@ def new_game():
 
 
 def main():
+    print('--------------NEW GAME--------------')
+    new_game()
 
     session_limit = 20
     play_again = True
     try_limit = 10
 
     while play_again and session_limit > 0 and try_limit > 0:
-
-        new_game()
-
         session_limit -= 1
+        print()
+        message = 'Play again? y/n ('+str(try_limit)+'): '
+        play = input(message)
+        play = play.lower()
 
         print()
-        play = input('Play again? (y/n):')
-        print()
 
-        if play in 'yY' or play == '':
-            continue
-        elif play in 'nN':
+        if play == 'y':
+            print('--------------NEW GAME--------------')
+            new_game()
+
+        elif play == 'n':
             play_again = False
+
         else:
             print('Enter valid input!')
             try_limit -= 1
